@@ -61,4 +61,22 @@ class DockTest < Minitest::Test
 
     assert_equal 45, dock.charge(sup_1)[:amount]
   end
+
+  def test_log_hour_method
+    dock = Dock.new('The Rowing Dock', 3)
+    kayak_1 = Boat.new(:kayak, 20)
+    kayak_2 = Boat.new(:kayak, 20)
+    canoe = Boat.new(:canoe, 25)
+    sup_1 = Boat.new(:standup_paddle_board, 15)
+    sup_2 = Boat.new(:standup_paddle_board, 15)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    eugene = Renter.new("Eugene Crabs", "1313131313131313")
+
+    dock.rent(kayak_1, patrick)
+    dock.rent(kayak_2, patrick)
+
+    dock.log_hour
+    assert_equal 1, kayak_1.hours_rented
+    assert_equal 1, kayak_2.hours_rented
+  end
 end

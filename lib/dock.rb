@@ -17,4 +17,10 @@ class Dock
       :amount => (boat.hours_rented * boat.price_per_hour)
     }
   end
+
+  def log_hour
+    @rental_log.map do |boat, values|
+      boat.hours_rented += 1
+    end
+  end
 end
