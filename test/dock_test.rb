@@ -51,5 +51,14 @@ class DockTest < Minitest::Test
     kayak_1.add_hour
 
     assert_equal 40, dock.charge(kayak_1)[:amount]
+
+    sup_1.add_hour
+    sup_1.add_hour
+    sup_1.add_hour
+    # After 3 hours no charge
+    sup_1.add_hour
+    sup_1.add_hour
+
+    assert_equal 45, dock.charge(sup_1)[:amount]
   end
 end
