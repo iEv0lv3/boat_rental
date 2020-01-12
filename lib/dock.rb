@@ -1,10 +1,11 @@
 class Dock
-  attr_reader :name, :max_rental_time, :rental_log
+  attr_reader :name, :max_rental_time, :rental_log, :revenue
 
   def initialize(name, max_rental_time)
     @name = name
     @max_rental_time = max_rental_time
     @rental_log = {}
+    @revenue = 0
   end
 
   def rent(boat, renter)
@@ -20,7 +21,12 @@ class Dock
 
   def log_hour
     @rental_log.map do |boat, values|
-      boat.hours_rented += 1
+      boat.hours_rented += 1 if boat.hours_rented <= 2
     end
+  end
+
+  def return(boat)
+    @revenue += (boat.hours_rented * boat.price_per_hour)
+    @rental_log.delete(boat)
   end
 end
