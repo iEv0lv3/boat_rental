@@ -10,4 +10,11 @@ class Dock
   def rent(boat, renter)
     @rental_log[boat] = renter
   end
+
+  def charge(boat)
+    {
+      :card_number => @rental_log[boat].credit_card_number,
+      :amount => (boat.hours_rented * boat.price_per_hour)
+    }
+  end
 end
